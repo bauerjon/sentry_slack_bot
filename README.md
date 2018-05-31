@@ -16,7 +16,7 @@ end
 
 ### Where/When to call it
 
-When and where this command is called is up to you. We've run it in a sidekiq worker using scheduled sidekiq jobs.
+When and where these commands are called is up to you. We've run it in a sidekiq worker using scheduled sidekiq jobs.
 
 ```ruby
 class UnattendedIssuesWorker
@@ -31,6 +31,14 @@ class UnattendedIssuesWorker
   
   def valid_business_hours?
     true
+  end
+end
+```
+
+```ruby
+Sidekiq.configure_server do |config|
+  config.periodic do |mgr|
+    mgr.register('0 15 * * *', UnattendedIssuesWorker) # https://crontab.guru/#0_3_*_*_*
   end
 end
 ```
