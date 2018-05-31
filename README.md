@@ -1,6 +1,13 @@
 # Sentry Slack Bot
 
-Notifies slack room with sentry reports around stale assignments, and works in tandem with https://sentry.io/integrations/slack/ to annoy people in a thread when they haven't acknowledged issues.
+No sentry issue left behind. 
+
+***Note: In general, this gem is not super useful unless you already use https://sentry.io/integrations/slack/ to notify your slack room about sentry issue.***
+
+### Available Features:
+
+- Builds on top of https://sentry.io/integrations/slack/ to annoy people *again* if they were already notified about a sentry issue in slack and the team did nothing about it.
+- Notifies slack room with a report around sentry issues that have been assigned, but neglected. This is helpful if people assign themselves, but never fix the issue.
 
 
 ### Usage
