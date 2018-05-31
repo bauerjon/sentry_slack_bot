@@ -6,7 +6,7 @@ No sentry slack notification left behind.
 
 ### Available Features:
 
-- Builds on top of https://sentry.io/integrations/slack/ to annoy people **again** if they were already notified about a sentry issue in slack and the team did nothing about it.
+- Builds on top of https://sentry.io/integrations/slack/ to annoy people ***again*** if they were already notified about a sentry issue in slack and the team did nothing about it.
 - Notifies slack room with a report around sentry issues that have been assigned in sentry, but neglected for over a week. This is helpful if people assign themselves in sentry, but never fix the issue.
 
 ### Usage
@@ -24,7 +24,9 @@ end
 
 #### Notify unattended issues
 
-This will re-notify the team if an 
+This will re-notify the team if a sentry issue was alerted in slack, but no action was taken in sentry.
+
+![screen shot 2018-05-31 at 4 50 15 pm](https://user-images.githubusercontent.com/5402488/40810831-a3a05c30-64f4-11e8-8e8e-470a81ead724.png)
 
 ```ruby
 SentrySlackBot.notify_unattended_issues!
@@ -35,7 +37,6 @@ SentrySlackBot.notify_unattended_issues!
 ```ruby
 SentrySlackBot.notify_stale_assignments!
 ```
-
 
 
 #### Where/When to call it
