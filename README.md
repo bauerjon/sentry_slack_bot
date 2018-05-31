@@ -36,7 +36,7 @@ SentrySlackBot.notify_unattended_issues!
 
 This will re-notify the team if a sentry issue was alerted in slack, but no action was taken in sentry. It looks at all issue messages in slack and if the issue is still unresolved, unassigned, or unignored in sentry it will re-notify the team. 
 
-##### Configuration
+#### Configuration
 
 By default it will notify `@channel`.  To notify certain groups/individuals you can set this value in config per sentry project:
 
@@ -51,8 +51,6 @@ SentrySlackBot.configure do |config|
   ...
 end
 ```
- 
-##### Configuration
 
 By default it will look at messages that came in after 5/31/2018. If you want the bot to look at messages before or after that date you can override it in the config:
 
@@ -64,13 +62,17 @@ SentrySlackBot.configure do |config|
 end
 ```
 
-#### Notify stale assignments
+### Notify stale assignments
+
+#### Usage
 
 ```ruby
 SentrySlackBot.notify_stale_assignments!
 ```
 
 This will notify the slack channel with a message telling the team who hasn't resolved/ignored/commented issues they have been assigned to or not commented on in over 7 days. To change the grace period of updating an issue, you can change this value in the config:
+
+#### Configuration
 
 ```ruby
 SentrySlackBot.configure do |config|
