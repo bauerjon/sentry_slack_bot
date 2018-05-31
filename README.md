@@ -2,7 +2,7 @@
 
 No sentry slack notification left behind. 
 
-***Note: In general, this gem is not super useful unless you already use https://sentry.io/integrations/slack/ to notify your slack room about sentry issue.***
+***Note: In general, this gem is not super useful unless you already use https://sentry.io/integrations/slack/ to notify your slack room about sentry issues.***
 
 ### Available Features:
 
@@ -31,15 +31,15 @@ end
 SentrySlackBot.notify_unattended_issues!
 ```
 
-This will re-notify the team if a sentry issue was alerted in slack, but no action was taken in sentry. It looks at all issues messages in slack from sentry and if the issue is still unresolved, unassigned, or unignored in sentry it will re-notify the team. 
+This will re-notify the team if a sentry issue was alerted in slack, but no action was taken in sentry. It looks at all issue messages in slack and if the issue is still unresolved, unassigned, or unignored in sentry it will re-notify the team. 
 
-By default it will notify `@channel`.  To send notify project's issues to certain groups/individuals you can set this value in config:
-
+By default it will notify `@channel`.  To notify certain groups/individuals you can set this value in config per sentry project:
+ 
 
 ```ruby
 SentrySlackBot.configure do |config|
   ...
-  config.slack_group_per_project = {
+  config.slack_group_per_sentry_project = {
     'ember-app' => '@bugs-ember',
     'rails-app' => '@bugs-rails',
     'jacks-service' => '@jack'
@@ -48,8 +48,20 @@ SentrySlackBot.configure do |config|
 end
 ```
 
+By default it will look at messages that came in after 5/31/2018. If you want the bot to look at messages before or after that date you can override it in the config:
+
+```ruby
+SentrySlackBot.configure do |config|
+  ...
+  config.unattended_issue_cut_off_date = '2018-01-01'
+  ...
+end
+```
 
 #### Notify stale assignments
+
+![screen shot 2018-05-31 at 5 18 04 pm](https://user-images.githubusercontent.com/5402488/40811514-1dd0b4d0-64f7-11e8-8cd0-77cfcb896cf9.png)
+
 
 ```ruby
 SentrySlackBot.notify_stale_assignments!
