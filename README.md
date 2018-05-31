@@ -6,7 +6,7 @@ No sentry slack notification left behind.
 
 ### Available Features:
 
-- Builds on top of https://sentry.io/integrations/slack/ to annoy people ***again*** if they were already notified about a sentry issue in slack and the team did nothing about it.
+- Builds on top of https://sentry.io/integrations/slack/ to notify people ***again*** if they were already notified about a sentry issue in slack and the team did nothing about it.
 
     ![screen shot 2018-05-31 at 4 50 15 pm](https://user-images.githubusercontent.com/5402488/40811598-799f4182-64f7-11e8-9c3f-e5064a826971.png)
 - Notifies slack room with a report around sentry issues that have been assigned in sentry, but neglected for over a week. This is helpful if people assign themselves in sentry, but never fix the issue.
