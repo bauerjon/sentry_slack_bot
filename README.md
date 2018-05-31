@@ -82,7 +82,7 @@ SentrySlackBot.configure do |config|
 end
 ```
 
-#### Where/When to call it
+### Where/When to call it
 
 When and where these commands are called is up to you. We've used it in a sidekiq worker using scheduled sidekiq jobs.
 
