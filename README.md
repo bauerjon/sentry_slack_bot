@@ -1,6 +1,6 @@
 # Sentry Slack Bot
 
-No sentry issue left behind. 
+No sentry notification left behind. 
 
 ***Note: In general, this gem is not super useful unless you already use https://sentry.io/integrations/slack/ to notify your slack room about sentry issue.***
 
