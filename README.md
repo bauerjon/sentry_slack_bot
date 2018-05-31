@@ -23,7 +23,7 @@ end
 
 ### Notify unattended issues
 
-![screen shot 2018-05-31 at 4 50 15 pm](https://user-images.githubusercontent.com/5402488/40810831-a3a05c30-64f4-11e8-8e8e-470a81ead724.png)
+![screen shot 2018-05-31 at 4 50 15 pm](https://user-images.githubusercontent.com/5402488/40811598-799f4182-64f7-11e8-9c3f-e5064a826971.png)
 
 #### Usage
 
@@ -60,13 +60,21 @@ end
 
 #### Notify stale assignments
 
-![screen shot 2018-05-31 at 5 18 04 pm](https://user-images.githubusercontent.com/5402488/40811514-1dd0b4d0-64f7-11e8-8cd0-77cfcb896cf9.png)
-
+![screen shot 2018-05-31 at 5 18 04 pm](https://user-images.githubusercontent.com/5402488/40811600-79ad41e2-64f7-11e8-8d31-ce08ee26753b.png)
 
 ```ruby
 SentrySlackBot.notify_stale_assignments!
 ```
 
+This will notify the slack channel with a message telling the team who hasn't resolved/ignored/commented issues they have been assigned to or not commented on in over 7 days. To change the grace period of updating an issue, you can change this value in the config:
+
+```ruby
+SentrySlackBot.configure do |config|
+  ...
+  config.stale_assignment_grace_period = 14.days # default is 7.days
+  ...
+end
+```
 
 #### Where/When to call it
 
