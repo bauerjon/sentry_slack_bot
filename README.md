@@ -2,14 +2,14 @@
 
 No sentry slack notification left behind. 
 
-***Note: In general, this gem is not super useful unless you already use https://sentry.io/integrations/slack/ to notify your slack room about sentry issues. This gem does not notify slack about new sentry issues, since that is already solved in the existing slack app, but offers a tool to re-notify teams about forgotten sentry issues/assignments.***
+***Note: In general, this gem is not super useful unless you already use https://sentry.io/integrations/slack/ to notify your slack channel about sentry issues. This gem does not notify slack about new sentry issues, since that is already solved in the existing slack app, but offers a tool to re-notify teams about forgotten sentry issues/assignments.***
 
 ### Available Features:
 
 - Builds on top of https://sentry.io/integrations/slack/ to notify people ***again*** if they were already notified about a sentry issue in slack and the team did nothing about it.
 
     ![screen shot 2018-05-31 at 4 50 15 pm](https://user-images.githubusercontent.com/5402488/40811598-799f4182-64f7-11e8-9c3f-e5064a826971.png)
-- Notifies slack room with a report around sentry issues that have been assigned in sentry, but neglected for over a week. This is helpful if people assign themselves in sentry, but never fix the issue.
+- Notifies slack channel with a report around sentry issues that have been assigned in sentry, but neglected for over a week. This is helpful if people assign themselves in sentry, but never fix the issue.
 
     ![screen shot 2018-05-31 at 5 18 04 pm](https://user-images.githubusercontent.com/5402488/40811890-c751f14e-64f8-11e8-9bfb-9a51b05a2a24.png)
 
