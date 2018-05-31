@@ -11,6 +11,8 @@ No sentry issue left behind.
 
 ### Usage
 
+#### Configuration
+
 ```ruby
 SentrySlackBot.configure do |config|
   config.sentry_token = ENV['YOUR_SENTRY_API_TOKEN'] # retrieved from https://sentry.io/api/
@@ -20,9 +22,25 @@ SentrySlackBot.configure do |config|
 end
 ```
 
-### Where/When to call it
+#### Notify unattended issues
 
-When and where these commands are called is up to you. We've run it in a sidekiq worker using scheduled sidekiq jobs.
+This will re-notify the team if an 
+
+```ruby
+SentrySlackBot.notify_unattended_issues!
+```
+
+#### Notify stale assignments
+
+```ruby
+SentrySlackBot.notify_stale_assignments!
+```
+
+
+
+#### Where/When to call it
+
+When and where these commands are called is up to you. We've used it in a sidekiq worker using scheduled sidekiq jobs.
 
 ```ruby
 class UnattendedIssuesWorker
