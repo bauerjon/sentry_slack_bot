@@ -27,8 +27,8 @@ module SentrySlackBot
       def assigned_unresolved_sentry_issues
         @assigned_unresolved_sentry_issues ||= (
           headers = { "Authorization" => "Bearer #{SentrySlackBot::Config.sentry_api_token}" }
-          poppays_sentry_projects.flat_map do |project|
-            response = HTTParty.get("https://app.getsentry.com/api/0/projects/popular-pays-lf/#{project['slug']}/issues/?query=is:unresolved is:assigned", headers: headers)
+          sentry_projects.flat_map do |project|
+            response = HTTParty.get("https://app.getsentry.com/api/0/projects/#{SentrySlackBot::Config.sentry_organization_slug}/#{project['slug']}/issues/?query=is:unresolved is:assigned", headers: headers)
             JSON.parse(response.body)
           end
         )
@@ -55,7 +55,7 @@ module SentrySlackBot
         JSON.parse(response.body)
       end
 
-      def poppays_sentry_projects
+      def sentry_projects
         headers = { "Authorization" => "Bearer #{SentrySlackBot::Config.sentry_api_token}" }
         response = HTTParty.get("https://app.getsentry.com//api/0/organizations/#{SentrySlackBot::Config.sentry_organization_slug}/projects/", headers: headers)
         JSON.parse(response.body)

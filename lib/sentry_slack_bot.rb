@@ -1,3 +1,5 @@
+require 'active_support/all'
+require 'httparty'
 require_relative "sentry_slack_bot/version"
 require_relative "sentry_slack_bot/config"
 require_relative "sentry_slack_bot/stale_assignments"

@@ -3,14 +3,14 @@ module SentrySlackBot
     class << self
       def notify!
         slack_channels_messages.each do |message|
-          title_link = message.try(:[], 'attachments')&.first.try(:[], 'title_link')
+          title_link = message.try(:[], 'attachments').try(:first).try(:[], 'title_link')
 
           if title_link
             match_data = /.*issues\/(?<issue_id>.*)\/.*/.match(title_link)
             next unless match_data
             issue = issue_from_id(match_data['issue_id'])
 
-            if issue && issue['assignedTo'] == nil
+            if issue
               ts = message['ts']
               group_to_notify = SentrySlackBot::Config.slack_group_per_sentry_project[issue['project']['slug']]
               text = "Hey there #{group_to_notify}! This bug is unresolved and has not been assigned in Sentry. *Please assign/resolve/or 'Ignore until happens X times...'*\n If left unassigned/unresolved/unignored you will continue to receive notifications during business hours."
@@ -27,14 +27,14 @@ module SentrySlackBot
       def unassigned_unresolved_sentry_issues
         @unassigned_unresolved_sentry_issues ||= (
           headers = { "Authorization" => "Bearer #{SentrySlackBot::Config.sentry_api_token}" }
-          poppays_sentry_projects.flat_map do |project|
-            response = HTTParty.get("https://app.getsentry.com/api/0/projects/popular-pays-lf/#{project['slug']}/issues/?statsPeriod=14d&query=is:unresolved is:unassigned", headers: headers)
+          sentry_projects.flat_map do |project|
+            response = HTTParty.get("https://app.getsentry.com/api/0/projects/#{SentrySlackBot::Config.sentry_organization_slug}/#{project['slug']}/issues/?statsPeriod=14d&query=is:unresolved is:unassigned", headers: headers)
             JSON.parse(response.body)
           end
         )
       end
 
-      def poppays_sentry_projects
+      def sentry_projects
         headers = { "Authorization" => "Bearer #{SentrySlackBot::Config.sentry_api_token}" }
         response = HTTParty.get("https://app.getsentry.com//api/0/organizations/#{SentrySlackBot::Config.sentry_organization_slug}/projects/", headers: headers)
         JSON.parse(response.body)
