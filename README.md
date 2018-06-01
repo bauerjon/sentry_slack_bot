@@ -31,7 +31,7 @@ end
 #### Usage
 
 ```ruby
-SentrySlackBot::UnattentedIssues.notify!
+SentrySlackBot::UnattendedIssues.notify!
 ```
 
 This will re-notify the team if a sentry issue was alerted in slack, but no action was taken in sentry. It looks at all issue messages in slack and if the issue is still unresolved, unassigned, or unignored in sentry it will re-notify the team.
@@ -92,7 +92,7 @@ class UnattendedIssuesWorker
 
   def perform
     return unless valid_business_hours? # optional, we found it helpful to NOT notify ourselves continuously unless in office
-    SentrySlackBot::UnattentedIssues.notify!
+    SentrySlackBot::UnattendedIssues.notify!
   end
 
   private
