@@ -49,7 +49,7 @@ describe SentrySlackBot::UnattendedIssues do
               "fallback" => "[creators-web-app] TimeoutError: Timeout",
               "title" => "TimeoutError: Timeout",
               "id" => 1,
-              "title_link" => "https://sentry.io/popular-pays-lf/creators-web-app/issues/#{issue_needing_notification}/?referrer=slack",
+              "title_link" => "https://sentry.io/#{sentry_organization_slug}/creators-web-app/issues/#{issue_needing_notification}/?referrer=slack",
               "color" => "f43f20",
               "fields" => [
                 {
