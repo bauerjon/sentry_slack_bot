@@ -31,7 +31,7 @@ end
 #### Usage
 
 ```ruby
-SentrySlackBot.notify_unattended_issues!
+SentrySlackBot::UnattentedIssues.notify!
 ```
 
 This will re-notify the team if a sentry issue was alerted in slack, but no action was taken in sentry. It looks at all issue messages in slack and if the issue is still unresolved, unassigned, or unignored in sentry it will re-notify the team.
@@ -67,7 +67,7 @@ end
 #### Usage
 
 ```ruby
-SentrySlackBot.notify_stale_assignments!
+SentrySlackBot::StaleAssignments.notify!
 ```
 
 This will notify the slack channel with a message telling the team who hasn't resolved/ignored/commented issues they have been assigned to or not commented on in over 7 days. To change the grace period of updating an issue, you can change this value in the config:
@@ -92,7 +92,7 @@ class UnattendedIssuesWorker
 
   def perform
     return unless valid_business_hours? # optional, we found it helpful to NOT notify ourselves continuously unless in office
-    SentrySlackBot.notify_slack_of_unattended_issues!
+    SentrySlackBot::UnattentedIssues.notify!
   end
 
   private
