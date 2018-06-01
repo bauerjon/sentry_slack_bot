@@ -20,34 +20,12 @@ describe SentrySlackBot::UnattendedIssues do
       "oldest"=>"1527224400",
       "messages"=> [
         {
-          "text"=>"",
-          "bot_id"=>"B8YAUHS8N",
           "attachments"=> [
             {
-              "fallback"=>"[creator-app] Error: The adapter operation was aborted",
-              "title"=>"Error: The adapter operation was aborted",
-              "id"=>1,
               "title_link"=>"https://sentry.io/#{sentry_organization_slug}/creators-app/issues/567051011/?referrer=slack",
-              "color"=>"f43f20",
-              "fields"=>[
-                {
-                  "title"=>"Culprit",
-                  "value"=>"ember-assets-lightning/assets/ember-debug/error in EmberError",
-                  "short"=>false
-                },
-                {
-                  "title"=>"Project",
-                  "value"=>"creators-app",
-                  "short"=>true
-                }
-              ]
             }
           ],
-          "type"=>"message",
-          "subtype"=>"bot_message",
-          "thread_ts"=>"1527611779.000017",
           "ts"=>channel_history_pagination_ts,
-          "reply_count"=>8
         },
         {
           "type"=>"message",
