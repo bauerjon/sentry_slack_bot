@@ -57,7 +57,7 @@ By default it will look at messages that came in after '2018-5-25'. If you want 
 ```ruby
 SentrySlackBot.configure do |config|
   ...
-  config.unattended_issue_cut_off_date = '2018-01-01'
+  config.unattended_issue_message_cut_off_date = '2018-01-01'
   ...
 end
 ```
