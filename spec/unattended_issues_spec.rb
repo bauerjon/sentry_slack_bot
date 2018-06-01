@@ -17,7 +17,6 @@ describe SentrySlackBot::UnattendedIssues do
   end
   let(:channel_history_response_1) do
     {
-      "oldest"=>"1527224400",
       "messages"=> [
         {
           "attachments"=> [
@@ -39,34 +38,13 @@ describe SentrySlackBot::UnattendedIssues do
   end
   let(:channel_history_response_2) do
     {
-      "oldest"=>"1527224400",
       "messages"=> [
         {
-          "text" => "",
-          "bot_id" => "B8YAUHS8N",
           "attachments" => [
             {
-              "fallback" => "[creators-web-app] TimeoutError: Timeout",
-              "title" => "TimeoutError: Timeout",
-              "id" => 1,
               "title_link" => "https://sentry.io/#{sentry_organization_slug}/creators-web-app/issues/#{issue_needing_notification}/?referrer=slack",
-              "color" => "f43f20",
-              "fields" => [
-                {
-                  "title" => "Culprit",
-                  "value" => "/js/aws-sdk-2.241.1.min.js in XMLHttpRequest.&lt;anonymous&gt;",
-                  "short" => false
-                },
-                {
-                  "title" => "Project",
-                  "value" => "creators-web-app",
-                  "short" => true
-                }
-              ]
             }
           ],
-          "type" => "message",
-          "subtype" => "bot_message",
           "ts" => ts_of_issue_needing_notification
         }
       ],
