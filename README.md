@@ -1,6 +1,6 @@
 # Sentry Slack Bot
 
-No sentry slack notification left behind. 
+No sentry slack notification left behind.
 
 ***Note: In general, this gem is not super useful unless you already use https://sentry.io/integrations/slack/ to notify your slack channel about sentry issues. This gem does not notify slack about new sentry issues, since that is already solved in the existing slack app, but offers a tool to re-notify teams about forgotten sentry issues/assignments.***
 
@@ -18,9 +18,9 @@ No sentry slack notification left behind.
 ### Shared Configuration
 
 ```ruby
-SentrySlackBot.configure do |config|
-  config.sentry_token = ENV['YOUR_SENTRY_API_TOKEN'] # retrieved from https://sentry.io/api/
-  config.slack_api_token = ENV['YOUR_SLACK_API_TOKEN'] # token from your app https://api.slack.com/slack-apps, needs permissions channels:history, channels:read, chat:write:bot, users:read, users:read.email
+SentrySlackBot::Config.configure do |config|
+  config.sentry_api_token = ENV['SENTRY_API_TOKEN'] # retrieved from https://sentry.io/api/
+  config.slack_api_token = ENV['SLACK_API_TOKEN'] # token from your app https://api.slack.com/slack-apps, needs permissions channels:history, channels:read, chat:write:bot, users:read, users:read.email
   config.slack_channel_id = ENV['SLACK_CHANNEL_TO_NOTIFY'] # i.e.- C0J97RLKB if you use https://sentry.io/integrations/slack/ use same channel id
   config.sentry_organization_slug = ENV['SENTRY_ORGANIZATION_NAME'] # slug for your sentry organization. https://sentry.io/<slug>/, required to grab list of projects
 end
@@ -34,7 +34,7 @@ end
 SentrySlackBot.notify_unattended_issues!
 ```
 
-This will re-notify the team if a sentry issue was alerted in slack, but no action was taken in sentry. It looks at all issue messages in slack and if the issue is still unresolved, unassigned, or unignored in sentry it will re-notify the team. 
+This will re-notify the team if a sentry issue was alerted in slack, but no action was taken in sentry. It looks at all issue messages in slack and if the issue is still unresolved, unassigned, or unignored in sentry it will re-notify the team.
 
 #### Configuration
 
@@ -52,7 +52,7 @@ SentrySlackBot.configure do |config|
 end
 ```
 
-By default it will look at messages that came in after 5/31/2018. If you want the bot to look at messages before or after that date you can override it in the config:
+By default it will look at messages that came in after '2018-5-25'. If you want the bot to look at messages before or after that date you can override it in the config:
 
 ```ruby
 SentrySlackBot.configure do |config|
@@ -94,9 +94,9 @@ class UnattendedIssuesWorker
     return unless valid_business_hours? # optional, we found it helpful to NOT notify ourselves continuously unless in office
     SentrySlackBot.notify_slack_of_unattended_issues!
   end
-  
+
   private
-  
+
   def valid_business_hours?
     true
   end
