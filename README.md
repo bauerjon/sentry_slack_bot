@@ -9,11 +9,7 @@ No sentry slack notification left behind.
 - Builds on top of https://sentry.io/integrations/slack/ to notify people ***again*** if they were already notified about a sentry issue in slack and the team did nothing about it.
 
     ![screen shot 2018-05-31 at 4 50 15 pm](https://user-images.githubusercontent.com/5402488/40811598-799f4182-64f7-11e8-9c3f-e5064a826971.png)
-- Notifies slack channel with a report around sentry issues that have been assigned in sentry, but neglected for over a week. This is helpful if people assign themselves in sentry, but never fix the issue.
-
-    ![screen shot 2018-05-31 at 5 18 04 pm](https://user-images.githubusercontent.com/5402488/40811890-c751f14e-64f8-11e8-9bfb-9a51b05a2a24.png)
-
-
+- Notifies slack user with a report around sentry issues that have been assigned in sentry, but neglected for over a week. This is helpful if people assign themselves in sentry, but never fix the issue.
 
 ### Shared Configuration
 
@@ -64,13 +60,15 @@ end
 
 ### Notify stale assignments
 
+*Note:* To use this feature it is helpful to set the slack_api_token to the bot specific token https://api.slack.com/bot-users otherwise `slackbot` will notify the user instead of your custom bot.
+
 #### Usage
 
 ```ruby
 SentrySlackBot::StaleAssignments.notify!
 ```
 
-This will notify the slack channel with a message telling the team who hasn't resolved/ignored/commented issues they have been assigned to or not commented on in over 7 days. To change the grace period of updating an issue, you can change this value in the config:
+This will notify the user with a message telling them about issue they have not addressed in over 7 days. To change the grace period of updating an issue, you can change this value in the config:
 
 #### Configuration
 

@@ -15,14 +15,16 @@ module SentrySlackBot
         end
       end
 
-      message_text = "The following unresolved issues have been assigned to you for over 1 week without resolve or additional comments. Please comment on issue with any updates/fix the issue/'ingore until X'/resolve/unassign. Otherwise you will continue to be notified during business hours.\n\n"
-
       stale_issues_by_assignee.each do |email, issue_links|
-        name = get_slack_name_from_email(email) || email
-        message_text += "#{name}:\n\n#{issue_links.join("\n")}\n\n"
-      end
+        slack_user_id = get_slack_id_from_email(email)
 
-      send_message_to_channel(SentrySlackBot::Config.slack_channel_id, message_text)
+        if slack_user_id
+          message_text = "Hello! The following unresolved issues have been assigned to you for over 1 week without resolve or additional comments. To stop these notifications: comment on the issue with any updates/fix the issue/ingore the issue until X/resolve the issue/unassign the issue. Otherwise you will continue to be notified during business hours.\n\n"
+          message_text += "\n\n#{issue_links.join("\n")}\n\n"
+
+          send_message_to_user(slack_user_id, message_text)
+        end
+      end
     end
 
     private
@@ -64,14 +66,13 @@ module SentrySlackBot
       JSON.parse(response.body)
     end
 
-    def get_slack_name_from_email(email)
+    def get_slack_id_from_email(email)
       response = HTTParty.get("https://slack.com/api/users.lookupByEmail?email=#{email}&token=#{SentrySlackBot::Config.slack_api_token}")
-      slack_name = JSON.parse(response.body).dig('user','name')
-      slack_name ? "@#{slack_name}" : nil
+      JSON.parse(response.body).dig('user','id')
     end
 
-    def send_message_to_channel(channel, text)
-      response = HTTParty.post("https://slack.com/api/chat.postMessage?token=#{SentrySlackBot::Config.slack_api_token}&channel=#{channel}&text=#{URI.encode(text)}&as_user=false&link_names=1")
+    def send_message_to_user(user_id, text)
+      response = HTTParty.post("https://slack.com/api/chat.postMessage?token=#{SentrySlackBot::Config.slack_api_token}&channel=#{user_id}&text=#{URI.encode(text)}&as_user=true&link_names=1")
       JSON.parse(response.body)
     end
   end
